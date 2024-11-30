@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npx tsc scrapeMutualFund.ts",
     "test": "npx ts-node scrapeMutualFund.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/axios": "^0.14.4",
     "@types/node": "^22.10.1",
+    "axios": "^1.7.8",
     "playwright": "^1.49.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"

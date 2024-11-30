@@ -1,4 +1,5 @@
 import { chromium } from 'playwright';
+import {sendSlackMessage} from "./Slack";
 
 async function scrapeMutualFund() {
     const browser = await chromium.launch({ headless: false });
@@ -68,6 +69,16 @@ async function scrapeMutualFund() {
     //console.log('Final scraped data:', JSON.stringify(mutualFunds, null, 2));
     console.log('Stocks present in multiple mutual funds: ' +commonStocks.length);
     console.log(JSON.stringify(commonStocks, null, 2));
+
+    // please format like  stockName (number of mutual funds)
+
+    let slackMessage = '';
+    commonStocks.forEach(stock => {
+        //console.log(`${stock.stock} (${stock.funds.length})`);
+        slackMessage += `${stock.stock} (${stock.funds.length})\n`;
+    });
+
+   await sendSlackMessage(slackMessage);
 
     await browser.close();
 }
