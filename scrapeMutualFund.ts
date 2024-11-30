@@ -2,7 +2,7 @@ import { chromium } from 'playwright';
 import {sendSlackMessage} from "./Slack";
 
 async function scrapeMutualFund() {
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
 
     const url = 'https://groww.in/mutual-funds/category/best-equity-mutual-funds';
