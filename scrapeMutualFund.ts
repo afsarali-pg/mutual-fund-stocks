@@ -1,11 +1,11 @@
 import { chromium } from 'playwright';
 import {sendSlackMessage} from "./Slack";
 
-async function scrapeMutualFund() {
+async function scrapeMutualFund(url: string) {
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
 
-    const url = 'https://groww.in/mutual-funds/category/best-equity-mutual-funds';
+    //const url = 'https://groww.in/mutual-funds/category/best-equity-mutual-funds';
     await page.goto(url);
 
     const mfsLists = await page.locator('#seoTopFundsList .cur-po').all();
@@ -95,6 +95,10 @@ export interface MutualFundDTO {
 }
 
 
-scrapeMutualFund().catch((error) => {
-    console.error('Error scraping mutual fund:', error);
+const urls = ['https://groww.in/mutual-funds/category/best-equity-mutual-funds','https://groww.in/mutual-funds/category/best-small-cap-mutual-funds','https://groww.in/mutual-funds/category/best-mid-cap-mutual-funds','https://groww.in/mutual-funds/category/best-multi-cap-mutual-funds']
+
+urls.forEach(url => {
+    scrapeMutualFund(url).catch((error) => {
+        console.error('Error scraping mutual fund:', error);
+    });
 });
