@@ -75,10 +75,11 @@ async function scrapeMutualFund(url: string) {
     let slackMessage = '';
     commonStocks.forEach(stock => {
         //console.log(`${stock.stock} (${stock.funds.length})`);
-        slackMessage += `${stock.stock} (${stock.funds.length})\n`;
+        slackMessage += `${url}\n${stock.stock} (${stock.funds.length})\n`;
     });
 
    await sendSlackMessage(slackMessage);
+   console.log()
 
     await browser.close();
 }
