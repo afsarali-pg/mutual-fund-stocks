@@ -1,0 +1,31 @@
+name: Run Mutual Fund Scraper
+
+on:
+  workflow_dispatch: # Allows manual triggering from the GitHub Actions UI
+
+jobs:
+  compile-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm i ts-node typescript tsx -g
+
+        # Step 4: Run the scraper
+      - name: Run Scraper
+        run: |
+          SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }} tsx scrapeMutualFund.ts
+          
