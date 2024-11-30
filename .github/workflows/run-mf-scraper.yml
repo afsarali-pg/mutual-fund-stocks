@@ -23,6 +23,8 @@ jobs:
         run: |
           npm install
           npm i ts-node typescript tsx -g
+          npx playwright install
+          npx playwright install-deps
 
         # Step 4: Run the scraper
       - name: Run Scraper
