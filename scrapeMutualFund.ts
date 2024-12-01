@@ -72,10 +72,10 @@ async function scrapeMutualFund(url: string) {
 
     // please format like  stockName (number of mutual funds)
 
-    let slackMessage = '';
+    let slackMessage = `${url}\n`;
     commonStocks.forEach(stock => {
         //console.log(`${stock.stock} (${stock.funds.length})`);
-        slackMessage += `${url}\n${stock.stock} (${stock.funds.length})\n`;
+        slackMessage += `${stock.stock} (${stock.funds.length})\n`;
     });
 
    await sendSlackMessage(slackMessage);
